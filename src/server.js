@@ -19,9 +19,11 @@ fastify.get('/api/sample', async(req, res) => {
 
 // start server
 const start = async() => {
+  
   try {
-    await fastify.listen({ port: 8000 });
-    console.log('Server Running at http://localhost:8000');
+    const PORT = process.env.PORT || 8000;
+    await fastify.listen({ port: PORT, host: '0.0.0.0' });
+    console.log(`Server Running at http://localhost:${PORT}`);
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
